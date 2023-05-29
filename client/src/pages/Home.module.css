@@ -1,0 +1,26 @@
+.img {
+    width: 50%;
+}
+
+.title {
+    padding: 25px 0px;
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+.container {
+    text-align: left;
+}
+
+.table {
+    text-align: center;
+}
+
+.table td {
+    align-items: center;
+    justify-content: center;
+}
