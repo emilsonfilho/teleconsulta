@@ -18,11 +18,17 @@ const Button: React.FC = () => {
         setPaciente({...paciente, [name]: value });
     }
 
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            setPaciente({ ...paciente, paciente_foto: file });
+        }
+      };
+      
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log(paciente);
         console.log(paciente.paciente_nome);
-        
 
         const formData = new FormData();
         for (const key in paciente) {
@@ -51,7 +57,7 @@ const Button: React.FC = () => {
                 </Modal.Header>
                 <Modal.Body>
                     
-                    <Form>
+                    <Form onSubmit={handleSubmit} encType='multipart/form-data'>
                             {/*
                             
                             <Form.Text className='text-muted'>
@@ -66,15 +72,11 @@ const Button: React.FC = () => {
                         <Input type='date' name='paciente_dataN' label='Data de Nascimento' placeholder='' handleChange={handleChange} />
                         <Input  type='text' name='paciente_cpf' label='CPF' placeholder='CPF do paciente' handleChange={handleChange} />
                         <Input type='tel' name='paciente_telefone' label='Número de telefone' placeholder='(00) 9.9999-9999' handleChange={handleChange} />
-                        <Input type='file' name='paciente_foto' label='Foto' placeholder='' handleChange={handleChange} />
+                        <Input type='file' name='paciente_foto' label='Foto' placeholder='' handleChange={handleFileChange} />
+                        <BootstrapButton as="input" type='submit' variant='info' className={styles.btn} value="Finalizar" />
                     </Form>
                     
                 </Modal.Body>
-                <Modal.Footer>
-                    <Link to="/">
-                        <BootstrapButton variant='info' className={styles.btn} onClick={handleSubmit}>Finalizar</BootstrapButton>
-                    </Link>
-                </Modal.Footer>
             </Modal>
         </>
     )
