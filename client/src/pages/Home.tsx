@@ -21,7 +21,6 @@ function Home() {
 
     const [pacientes, setPacientes] = useState<Paciente[]>([]);
 
-
     useEffect(() => {
         const fetchData = async () => {
           try {

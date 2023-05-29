@@ -4,12 +4,15 @@ import { Button as BootstrapButton, Modal, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Input from '../form/Input';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Button: React.FC = () => {  
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const navigate = useNavigate();
 
     const [paciente, setPaciente] = useState<any>({});
     
@@ -44,6 +47,7 @@ const Button: React.FC = () => {
         }).then(response => {
             console.log(response);
             handleClose();
+            navigate('/');
         }).catch(err => console.log(err));
     }
 

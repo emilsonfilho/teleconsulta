@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Geekcom\ValidatorDocs\Validator;
 
 class PacientesController extends Controller
 {
@@ -29,6 +30,10 @@ class PacientesController extends Controller
     {
 
         try {
+            $this->validate($request, [
+                'paciente_cpf'=> 'required|cpf',
+            ]);
+        
             $novoPaciente = new Paciente();
             
             if ($request->hasFile('paciente_foto') && $request->file('paciente_foto')->isValid()) {
