@@ -6,7 +6,21 @@ import CadastrarPaciente from "../components/CadastrarPaciente";
 import { Link } from "react-router-dom";
 import styles from './Navbar.module.css';
 
-const Navbar = () => {
+type Paciente = {
+  paciente_id: number;
+  paciente_foto: string;
+  paciente_nome: string;
+  paciente_dataN: string;
+  paciente_cpf: string;
+  paciente_telefone: string;
+  paciente_atendido: boolean;
+}
+
+interface NavbarProps {
+  addPaciente: (novoPaciente: Paciente) => void
+}
+
+const Navbar: React.FC<NavbarProps> = ({ addPaciente }) => {
     
     return (
         <BootstrapNavbar bg="light" variant="light">
@@ -19,26 +33,12 @@ const Navbar = () => {
                 <BootstrapNavbar.Toggle />
                 <BootstrapNavbar.Collapse className="justify-content-end">
                     <BootstrapNavbar.Text>
-                        <CadastrarPaciente />
+                        <CadastrarPaciente addPaciente={addPaciente} />
                     </BootstrapNavbar.Text>
                 </BootstrapNavbar.Collapse>
             </Container>
         </BootstrapNavbar>
-   );/*
-   return (
-    <BootstrapNavbar>
-      <Container>
-        <BootstrapNavbar.Brand href="#home">BootstrapNavbar with text</BootstrapNavbar.Brand>
-        <BootstrapNavbar.Toggle />
-        <BootstrapNavbar.Collapse className="justify-content-end">
-          <BootstrapNavbar.Text>
-            Signed in as: <a href="#login">Mark Otto</a>
-          </BootstrapNavbar.Text>
-        </BootstrapNavbar.Collapse>
-      </Container>
-    </BootstrapNavbar>
-  );*/
-
+   );
 };
 
 export default Navbar;
