@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Geekcom\ValidatorDocs\Validator;
 
 class PacientesController extends Controller
 {
@@ -71,5 +70,15 @@ class PacientesController extends Controller
             return response()->json(['error' => $errorMessage], 400);
         }
         
+    }
+
+    public function getPaciente($id) {
+        $paciente = Paciente::where('paciente_id', $id)->first();
+
+        if (!$paciente) {
+            return response()->json(['error' => 'Paciente não encontrtado.'], 400);
+        }
+
+        return response()->json($paciente);
     }
 }

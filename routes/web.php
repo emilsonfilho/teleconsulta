@@ -24,3 +24,5 @@ Route::get('/getPacientes', [PacientesController::class, 'index']);
 Route::get('/pacientes/fotos/{filename}', [PacientesController::class, 'getImage']);
 
 Route::post('/pacientes/cadastrarPaciente', [PacientesController::class, 'post']);
+
+Route::get('/infoPaciente/{id}', [PacientesController::class, 'getPaciente']);

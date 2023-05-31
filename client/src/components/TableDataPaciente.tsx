@@ -36,7 +36,7 @@ const TableDataPaciente: React.FC<TableDataPacienteProps> = ({ foto, nome, idade
         </td>
         <td>
             <p>
-                <Link to={`/pacientes/infoPaciente/${id}`}>
+                <Link to={`/infoPaciente/${id}`}>
                     <BsFillArrowRightSquareFill className={styles.icon} />
                 </Link>
             </p>
