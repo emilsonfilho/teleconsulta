@@ -10,9 +10,10 @@ interface TableDataPacienteProps {
     cpf: string;
     tel: string;
     situacao: boolean;
+    id: number;
 }
 
-const TableDataPaciente: React.FC<TableDataPacienteProps> = ({foto, nome, idade, tel, cpf, situacao}) => {
+const TableDataPaciente: React.FC<TableDataPacienteProps> = ({ foto, nome, idade, tel, cpf, situacao, id }) => {
     
     return <tr>
         <td>
@@ -35,7 +36,7 @@ const TableDataPaciente: React.FC<TableDataPacienteProps> = ({foto, nome, idade,
         </td>
         <td>
             <p>
-                <Link to="/">
+                <Link to={`/pacientes/infoPaciente/${id}`}>
                     <BsFillArrowRightSquareFill className={styles.icon} />
                 </Link>
             </p>

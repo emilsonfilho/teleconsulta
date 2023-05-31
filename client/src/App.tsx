@@ -46,7 +46,7 @@ const App: React.FC = () => {
         <Navbar addPaciente={addPaciente} />
         <Routes>
           <Route path="/" element={<Home pacientes={pacientes} addPaciente={addPaciente} />} />
-          <Route path="/infoPaciente/" element={<InfoPaciente />} />
+          <Route path="/infoPaciente/:id" element={<InfoPaciente />} />
         </Routes>
         </Router>
     </div>
