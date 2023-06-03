@@ -1,0 +1,8 @@
+.name {
+    color: #000;
+    text-decoration: none;
+}
+
+.name:hover {
+    color: #0fa3c0;
+}

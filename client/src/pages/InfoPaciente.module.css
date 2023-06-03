@@ -1,0 +1,42 @@
+.section {
+    display: flex;
+    gap: 16px;
+}
+
+.divConsulta h2,
+.divConsulta h3 {
+    margin: 16px 0px;
+    text-align: left;
+}
+
+.foto img {
+    width: 350px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.divBtn {
+    display: flex;
+    justify-content: end;
+}
+
+.igroup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.igroup span {
+    background-color: transparent;
+    border: none;
+}
