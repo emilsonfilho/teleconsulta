@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Row, Image, Button, Form, Col, InputGroup, Table } from 'react-bootstrap';
 import styles from './InfoPaciente.module.css'
+import formatDate from '../utils/formatDate';
 
 type DadosSaude = {
   consulta_temperaturaPaciente: string;
@@ -195,7 +196,7 @@ const InfoPaciente: React.FC = () => {
                 <strong>CPF:</strong> {paciente.paciente_cpf}
               </p>
               <p>
-                <strong>Data de Nascimento:</strong> {paciente.paciente_dataN}
+                <strong>Data de Nascimento:</strong> {formatDate(paciente.paciente_dataN)}
               </p>
               <p>
                 <strong>Telefone:</strong> {paciente.paciente_telefone}
@@ -280,7 +281,7 @@ const InfoPaciente: React.FC = () => {
         <h2 className={styles.titleConsultas}>Consultas anteriores</h2>
         <hr />
         {(consultas.length !== 0) ? (
-          <Table>
+          <Table className={styles.table}>
             <thead>
               <tr>
                 <th>Data da consulta</th>
@@ -294,7 +295,7 @@ const InfoPaciente: React.FC = () => {
             <tbody>
               {consultas.map((consulta: Consulta, index) => (
                 <tr key={index}>
-                  <td>{consulta.consulta_dataAtendimento}</td>
+                  <td>{formatDate(consulta.consulta_dataAtendimento)}</td>
                   <td>{consulta.consulta_temperaturaPaciente}</td>
                   <td>{consulta.consulta_frequenciaCardiacaPaciente}</td>
                   <td>{consulta.consulta_pressaoArterialSistolicaPaciente} x {consulta.consulta_pressaoArterialDiastolicaPaciente}</td>

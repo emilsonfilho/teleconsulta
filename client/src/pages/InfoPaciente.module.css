@@ -66,3 +66,8 @@
     text-align: left;
     padding: 32px 16px;
 }
+
+.table td,
+.table th {
+    text-align: center;
+}
