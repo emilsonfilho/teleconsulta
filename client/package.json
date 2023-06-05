@@ -8,7 +8,6 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^29.5.1",
     "@types/node": "^20.2.0",
-    "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
@@ -50,6 +49,7 @@
   },
   "devDependencies": {
     "@types/file-loader": "^5.0.1",
+    "@types/react": "^18.2.8",
     "@types/react-input-mask": "^3.0.2",
     "@types/react-router-dom": "^5.3.3"
   }

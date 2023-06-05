@@ -1,6 +1,12 @@
 .btn {
     color: #fff;
     padding: 10px 15px;
+    background-color: #0fa3c0;
+    border: none;
+}
+
+.btn:hover {
+    color: #fff;
 }
 
 .buttonsContainer {

@@ -1,6 +1,7 @@
 .section {
     display: flex;
     gap: 16px;
+    padding: 32px 0px;
 }
 
 .divConsulta h2,
@@ -23,6 +24,7 @@
 .divBtn {
     display: flex;
     justify-content: end;
+    padding: 32px 0px;
 }
 
 .igroup {
@@ -39,4 +41,20 @@
 .igroup span {
     background-color: transparent;
     border: none;
+}
+
+.btn {
+    color: #fff;
+    padding: 10px 15px;
+    background-color: #0fa3c0;
+    border: none;
+}
+
+.btn:hover {
+    background-color: #0dcaf0;
+}
+
+.titleConsultas {
+    padding-bottom: 16px;
+    font-weight: 700;
 }

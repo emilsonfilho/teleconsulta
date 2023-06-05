@@ -1,18 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Row, Image, Button, Form, Col, InputGroup, Table } from 'react-bootstrap';
 import styles from './InfoPaciente.module.css'
-
-type Paciente = {
-  paciente_id: number;
-  paciente_foto: string;
-  paciente_nome: string;
-  paciente_dataN: string;
-  paciente_cpf: string;
-  paciente_telefone: string;
-  paciente_atendido: boolean;
-}
 
 type DadosSaude = {
   consulta_temperaturaPaciente: string;
@@ -39,6 +29,7 @@ type Consulta = {
 
 const InfoPaciente: React.FC = () => {
   const { id } = useParams();
+  const navigate = useNavigate()
   const [paciente, setPaciente] = useState<any>();
   const [showConsulta, setShowConsulta] = useState(false)
   const [showButton, setShowButton] = useState(true)
@@ -52,15 +43,40 @@ const InfoPaciente: React.FC = () => {
   const [sintomas, setSintomas] = useState<Sintoma[]>([])
   const [consultas, setConsultas] = useState<Consulta[]>([])
   const [resultados, setResultados] = useState<{ [key: number]: string }>({});
+  const [formValid, setFormValid] = useState(false);
+
+  const validateForm = () => {
+    const {
+      consulta_temperaturaPaciente,
+      consulta_frequenciaRespiratoriaPaciente,
+      consulta_frequenciaCardiacaPaciente,
+      consulta_pressaoArterialSistolicaPaciente,
+      consulta_pressaoArterialDiastolicaPaciente,
+    } = dadosSaude;
+  
+    const isFormValid =
+      consulta_temperaturaPaciente.trim() !== '' &&
+      consulta_frequenciaRespiratoriaPaciente.trim() !== '' &&
+      consulta_frequenciaCardiacaPaciente.trim() !== '' &&
+      consulta_pressaoArterialSistolicaPaciente.trim() !== '' &&
+      consulta_pressaoArterialDiastolicaPaciente.trim() !== '';
+  
+    setFormValid(isFormValid);
+  };
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    const valorNumerico = value.replace(/[^0-9,]/g, '')
+    const valorNumerico = value.replace(/[^0-9,]/g, '');
+  
     setDadosSaude((prevDadosSaude) => ({
       ...prevDadosSaude,
       [name]: valorNumerico,
-    }))
-  }
+    }));
+  
+    validateForm();
+  };
+  
 
   const toggleConsulta = () => {
     setShowConsulta(!showConsulta)
@@ -96,7 +112,10 @@ const InfoPaciente: React.FC = () => {
     })
       .then(response => {
         setShowConsulta(!showConsulta);
-        setShowButton(!showButton)
+        setShowButton(!showButton);
+        console.log(response);
+        navigate('/');
+        
       })
       .catch(err => {
         console.log(err);
@@ -191,7 +210,7 @@ const InfoPaciente: React.FC = () => {
         <div className={styles.divBtn}>
             {showButton && (
               <Button variant='primary' onClick={toggleConsulta} className={styles.btn}>
-                {!showConsulta ? "Realizar Consulta" : "Finalizar"}
+                {!showConsulta ? "Realizar Consulta" : ""}
               </Button>
             )}
         </div>
@@ -251,7 +270,7 @@ const InfoPaciente: React.FC = () => {
                     </Col>
                     ))}
                   </Row>
-                  <Button variant='primary' type='submit'>
+                  <Button variant='primary' type='submit' disabled={!formValid} className={styles.btn} >
                     Finalizar
                   </Button>
                 </Form>
@@ -261,7 +280,7 @@ const InfoPaciente: React.FC = () => {
     </Container>
     <Container>
       <Row>
-        <h2>Consultas anteriores</h2>
+        <h2 className={styles.titleConsultas}>Consultas anteriores</h2>
         {(consultas.length !== 0) ? (
           <Table>
             <thead>
