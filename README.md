@@ -1,13 +1,13 @@
 # teleconsulta
  Sistema desafio de gerenciamento médico para consultas de pacientes suspeitos de COVID-19. Desenvolvido utilizando uma abordagem FullStack, combina as poderosas tecnologias Laravel, React, React Bootstrap, Axios e TypeScript.
 
-# Apresentação
+# 🌇 Apresentação
 <img src="public/teleconsulta_banner.png" alt="Banner do projeto" id="img" />
 
-# Badges 
+# 🌠 Badges 
 <img src="https://img.shields.io/github/languages/count/emilsonfilho/teleconsulta?color=%232C365E%20&label=Linguagens%20usadas&style=for-the-badge" alt="Quantidades de linguagens de programação usadas no projeto" /> <img src="https://img.shields.io/github/languages/code-size/emilsonfilho/teleconsulta?color=%23177E89%20&label=Tamanho%20de%20c%C3%B3digo&style=for-the-badge" alt="Code Size" /> <img src="https://img.shields.io/github/license/emilsonfilho/teleconsulta?color=%231D84B5%20&label=licen%C3%A7a&style=for-the-badge" alt="Licença" />
 
-# Índice
+# ◽️Índice
 * Apresentação
 * Badges
 * Descrição do Projeto
@@ -30,17 +30,17 @@ Contudo, claro, sempre estará aberto para opiniões e atualizações construtiv
 - `Funcionalidade 4`: Busca visua de todas as consultas de cada paciente que já possua ao menos uma registrada
 - `Funcionalidade 5`: Busca de dados do paciente para amostra ao usuário
 
-# Demontrações
+# 🌻 Demontrações
 <img src="public/demonstracoes.png" alt="Telas de demonstrações" />
 
-# Tecnologias
+# ♦️ Tecnologias
 - <a href="https://axios-http.com/docs/intro">Axios</a>
 - <a href="https://legacy.reactjs.org/docs/getting-started.html">React</a>
 - <a href="https://react-bootstrap-v4.netlify.app/getting-started/introduction/">React Bootstrap</a>
 - <a href="https://www.typescriptlang.org/docs/">TypeScript</a>
 - <a href="https://laravel.com/docs/10.x/readme">Laravel 10</a>
 
-# Dependências
+# ✈️ Dependências
 Antes de tudo, devemos apresentar as dependências que o projeto exije
 * Front-End
     * @testing-library/jest-dom (v5.16.5)
@@ -63,7 +63,7 @@ Antes de tudo, devemos apresentar as dependências que o projeto exije
     * php (v8.1)
     * geekcom/validator-docs (v3.9)
 
-# Instalação
+# 🌲 Instalação
 Vamos passo a passo. Primeiro, instalaremos o projeto. 
 Para isso, é importante que você já tenha o Composer instalado em sua máquina e npm também. Além, é claro, do git.
 
@@ -87,7 +87,7 @@ Para isso, é importante que você já tenha o Composer instalado em sua máquin
 11. Se der algum erro, adicione `--force` ao final do comando.
 12. Após isso, seu computador estará apto a trabalhar com o projeto em questão. 
 
-# Conclusão
+# 🎯 Conclusão
 O código pode possuir implementações e melhorias ainda, como o registro de diferentes usuários num mesmo sistema, garantindo mais proteção ao projeto. 
 O sistema pode implementar a remoção e edição de pacientes.
 
