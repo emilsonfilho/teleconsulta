@@ -34,11 +34,11 @@ Contudo, claro, sempre estará aberto para opiniões e atualizações construtiv
 <img src="public/demonstracoes.png" alt="Telas de demonstrações" />
 
 # Tecnologias
-- Axios
-- React
-- React Bootstrap
-- TypeScript
-- Laravel
+- <a href="https://axios-http.com/docs/intro">Axios</a>
+- <a href="https://legacy.reactjs.org/docs/getting-started.html">React</a>
+- <a href="https://react-bootstrap-v4.netlify.app/getting-started/introduction/">React Bootstrap</a>
+- <a href="https://www.typescriptlang.org/docs/">TypeScript</a>
+- <a href="https://laravel.com/docs/10.x/readme">Laravel 10</a>
 
 # Dependências
 Antes de tudo, devemos apresentar as dependências que o projeto exije
