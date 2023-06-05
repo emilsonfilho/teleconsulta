@@ -4,10 +4,13 @@
     padding: 32px 0px;
 }
 
+.divConsulta {
+    text-align: left;
+}
+
 .divConsulta h2,
 .divConsulta h3 {
-    margin: 16px 0px;
-    text-align: left;
+    padding: 16px 0px;
 }
 
 .foto img {
@@ -57,4 +60,9 @@
 .titleConsultas {
     padding-bottom: 16px;
     font-weight: 700;
+}
+
+.consultas {
+    text-align: left;
+    padding: 32px 16px;
 }

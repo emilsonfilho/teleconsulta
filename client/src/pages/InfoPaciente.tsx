@@ -203,6 +203,7 @@ const InfoPaciente: React.FC = () => {
             </div>
           )}
         </section>
+        <hr />
         <div className={styles.divBtn}>
             {showButton && (
               <Button variant='primary' onClick={toggleConsulta} className={styles.btn}>
@@ -274,9 +275,10 @@ const InfoPaciente: React.FC = () => {
             )}
       </Row>
     </Container>
-    <Container>
+    <Container className={styles.consultas}>
       <Row>
         <h2 className={styles.titleConsultas}>Consultas anteriores</h2>
+        <hr />
         {(consultas.length !== 0) ? (
           <Table>
             <thead>
