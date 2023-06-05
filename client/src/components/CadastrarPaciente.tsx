@@ -142,7 +142,7 @@ const CadastrarPaciente: React.FC<CadastrarPacienteProps> = ({ addPaciente }) =>
             </div>
           )}
           <div className={styles.buttonsContainer}>
-            <BootstrapButton variant="primary" type="submit">
+            <BootstrapButton variant="primary" type="submit" className={styles.btn}>
               Cadastrar
             </BootstrapButton>
           </div>
