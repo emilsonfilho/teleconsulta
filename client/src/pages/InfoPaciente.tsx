@@ -28,6 +28,7 @@ type Consulta = {
 }
 
 const InfoPaciente: React.FC = () => {
+  // Hooks
   const { id } = useParams();
   const navigate = useNavigate()
   const [paciente, setPaciente] = useState<any>();
@@ -45,6 +46,7 @@ const InfoPaciente: React.FC = () => {
   const [resultados, setResultados] = useState<{ [key: number]: string }>({});
   const [formValid, setFormValid] = useState(false);
 
+  // Functions
   const validateForm = () => {
     const {
       consulta_temperaturaPaciente,
@@ -63,8 +65,6 @@ const InfoPaciente: React.FC = () => {
   
     setFormValid(isFormValid);
   };
-  
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     const valorNumerico = value.replace(/[^0-9,]/g, '');
@@ -76,13 +76,10 @@ const InfoPaciente: React.FC = () => {
   
     validateForm();
   };
-  
-
   const toggleConsulta = () => {
     setShowConsulta(!showConsulta)
     setShowButton(!showButton)
   }
-
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -120,8 +117,24 @@ const InfoPaciente: React.FC = () => {
       .catch(err => {
         console.log(err);
       })
-  }
+    }
+    const fetchResultado = (id: number) => {
+      const getResultado = async (id: number) => {
+        try {
+          const response = await axios.get(`http://localhost:8000/resultados/${id}`);
+          const result = response.data;
+          setResultados((prevResultados) => ({
+            ...prevResultados,
+            [id]: result,
+          }))
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      getResultado(id)
+    }
 
+  // UseEffects
   useEffect(() => {
     const fetchPaciente = async () => {
       try {
@@ -134,7 +147,6 @@ const InfoPaciente: React.FC = () => {
     };
     fetchPaciente();
   }, [id]);
-
   useEffect(() => {
     const fetchSintomas = async () => {
       try {
@@ -149,7 +161,6 @@ const InfoPaciente: React.FC = () => {
     }
     fetchSintomas()
   }, [])
-
   useEffect(() => {
     const fetchConsultas = async () => {
       try {
@@ -168,21 +179,6 @@ const InfoPaciente: React.FC = () => {
     fetchConsultas()
   }, [id])
 
-  const fetchResultado = (id: number) => {
-    const getResultado = async (id: number) => {
-      try {
-        const response = await axios.get(`http://localhost:8000/resultados/${id}`);
-        const result = response.data;
-        setResultados((prevResultados) => ({
-          ...prevResultados,
-          [id]: result,
-        }))
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    getResultado(id)
-  }
 
   return (
 	<>

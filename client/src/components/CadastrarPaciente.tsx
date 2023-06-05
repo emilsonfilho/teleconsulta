@@ -20,15 +20,11 @@ interface CadastrarPacienteProps {
 }
 
 const CadastrarPaciente: React.FC<CadastrarPacienteProps> = ({ addPaciente }) => {
+  // Hooks
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const navigate = useNavigate();
-
   const [paciente, setPaciente] = useState<Paciente>({
     paciente_id: 0,
     paciente_foto: '',
@@ -39,18 +35,19 @@ const CadastrarPaciente: React.FC<CadastrarPacienteProps> = ({ addPaciente }) =>
     paciente_atendido: false,
   });
 
+  // Functions
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPaciente({ ...paciente, [name]: value });
   };
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setPaciente({ ...paciente, paciente_foto: file.name });
     }
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 

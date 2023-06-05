@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home.tsx';
 import InfoPaciente from './pages/InfoPaciente.tsx';
-import CadastrarPaciente from './components/CadastrarPaciente.tsx';
 import axios from 'axios';
 
 
@@ -20,8 +19,15 @@ const App: React.FC = () => {
     paciente_atendido: boolean;
   }
 
+  // Hooks
   const [pacientes, setPacientes] = useState<Paciente[]>([]);
 
+  // Functions
+  const addPaciente = (novoPaciente: Paciente) => {
+    setPacientes([...pacientes, novoPaciente]);
+  }
+
+  // UseEffects
   useEffect(() => {
     const fetchPacientes = async () => {
       try {
@@ -36,9 +42,6 @@ const App: React.FC = () => {
     fetchPacientes();
   })
 
-  const addPaciente = (novoPaciente: Paciente) => {
-    setPacientes([...pacientes, novoPaciente]);
-  }
 
   return (
     <div className="App">

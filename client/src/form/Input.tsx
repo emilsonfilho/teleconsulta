@@ -26,8 +26,10 @@ const Input: React.FC<InputProps> = ({
   errorMessage,
   mask,
 }) => {
+  // Resources
   const inputRef = createRef<HTMLInputElement>()
 
+  // Functions
   const handleAccept = (value: string) => {
     const event = new Event('input', { bubbles: true }) as unknown as React.ChangeEvent<HTMLInputElement>
     Object.defineProperty(event, 'target', {

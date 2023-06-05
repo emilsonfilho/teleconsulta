@@ -21,7 +21,6 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ addPaciente }) => {
-    
     return (
         <BootstrapNavbar bg="light" variant="light">
             <Container>
