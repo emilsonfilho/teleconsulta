@@ -222,14 +222,14 @@ const InfoPaciente: React.FC = () => {
                       <Form.Label htmlFor="inlineFormInput" visuallyHidden>
                         Temperatura
                       </Form.Label>
-                      <Form.Control className="mb-2" id="inlineFormInput" placeholder="Temperatura (°C)" name="consulta_temperaturaPaciente" value={dadosSaude.consulta_temperaturaPaciente} onChange={handleChange} />
+                      <Form.Control className="mb-2" id="inlineFormInput" placeholder="Temperatura (°C)" name="consulta_temperaturaPaciente" value={dadosSaude.consulta_temperaturaPaciente} onChange={handleChange} autoComplete='off' />
                     </Col>
                     <Col xs="auto">
                       <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
                         Frequência Respiratória
                       </Form.Label>
                       <InputGroup className="mb-2">
-                        <Form.Control id="inlineFormInputGroup" placeholder="Frequência Respiratória" name='consulta_frequenciaRespiratoriaPaciente' value={dadosSaude.consulta_frequenciaRespiratoriaPaciente} onChange={handleChange} />
+                        <Form.Control id="inlineFormInputGroup" placeholder="Frequência Respiratória" name='consulta_frequenciaRespiratoriaPaciente' value={dadosSaude.consulta_frequenciaRespiratoriaPaciente} onChange={handleChange} autoComplete='off' />
                       </InputGroup>
                     </Col>
                     <Col xs="auto">
@@ -237,7 +237,7 @@ const InfoPaciente: React.FC = () => {
                         Frequência Cardíaca
                       </Form.Label>
                       <InputGroup className="mb-2">
-                        <Form.Control id="inlineFormInputGroup" placeholder="Frequência Cardíaca" name='consulta_frequenciaCardiacaPaciente' value={dadosSaude.consulta_frequenciaCardiacaPaciente} onChange={handleChange} />
+                        <Form.Control id="inlineFormInputGroup" placeholder="Frequência Cardíaca" name='consulta_frequenciaCardiacaPaciente' value={dadosSaude.consulta_frequenciaCardiacaPaciente} onChange={handleChange} autoComplete='off' />
                       </InputGroup>
                     </Col>
                     <Col xs="auto">
@@ -245,7 +245,7 @@ const InfoPaciente: React.FC = () => {
                         Pressão Arterial Sistólica
                       </Form.Label>
                       <InputGroup className="mb-2">
-                        <Form.Control id="inlineFormInputGroup" placeholder="Pressão Arterial Sistólica" name='consulta_pressaoArterialSistolicaPaciente' value={dadosSaude.consulta_pressaoArterialSistolicaPaciente} onChange={handleChange} />
+                        <Form.Control id="inlineFormInputGroup" placeholder="Pressão Arterial Sistólica" name='consulta_pressaoArterialSistolicaPaciente' value={dadosSaude.consulta_pressaoArterialSistolicaPaciente} onChange={handleChange} autoComplete='off' />
                       </InputGroup>
                     </Col>
                     <Col xs="auto">
@@ -253,7 +253,7 @@ const InfoPaciente: React.FC = () => {
                         Pressão Arterial Diastólica
                       </Form.Label>
                       <InputGroup className="mb-2">
-                        <Form.Control id="inlineFormInputGroup" placeholder="Pressão Arterial Diastólica" name='consulta_pressaoArterialDiastolicaPaciente' value={dadosSaude.consulta_pressaoArterialDiastolicaPaciente} onChange={handleChange} />
+                        <Form.Control id="inlineFormInputGroup" placeholder="Pressão Arterial Diastólica" name='consulta_pressaoArterialDiastolicaPaciente' value={dadosSaude.consulta_pressaoArterialDiastolicaPaciente} onChange={handleChange} autoComplete='off' />
                       </InputGroup>
                     </Col>
                   </Row>
