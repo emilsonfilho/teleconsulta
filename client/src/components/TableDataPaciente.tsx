@@ -17,7 +17,7 @@ const TableDataPaciente: React.FC<TableDataPacienteProps> = ({ foto, nome, idade
     
     return <tr>
         <td>
-            <img src={`http://localhost:8000/pacientes/${foto}`} alt="Foto do(a) paciente" className={styles.img} />
+            <img src={`http://localhost:8000/storage/${foto}`} alt="Foto do(a) paciente" className={styles.img} />
         </td>
         <td>
             <p>{nome}</p>

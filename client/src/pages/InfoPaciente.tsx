@@ -103,7 +103,7 @@ const InfoPaciente: React.FC = () => {
 
     console.log([...formData.entries()]);
     
-    axios.post('http://localhost:8000/consultas/cadastrarConsulta', formData, {
+    axios.post('http://localhost:8000/api/consultas/cadastrarConsulta', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
@@ -113,7 +113,6 @@ const InfoPaciente: React.FC = () => {
         setShowButton(!showButton);
         console.log(response);
         navigate('/');
-        
       })
       .catch(err => {
         console.log(err);
@@ -122,7 +121,7 @@ const InfoPaciente: React.FC = () => {
     const fetchResultado = (id: number) => {
       const getResultado = async (id: number) => {
         try {
-          const response = await axios.get(`http://localhost:8000/resultados/${id}`);
+          const response = await axios.get(`http://localhost:8000/api/resultados/${id}`);
           const result = response.data;
           setResultados((prevResultados) => ({
             ...prevResultados,
@@ -139,8 +138,8 @@ const InfoPaciente: React.FC = () => {
   useEffect(() => {
     const fetchPaciente = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/infoPaciente/${id}`);
-        const result = response.data;
+        const response = await axios.get(`http://localhost:8000/api/infoPaciente/${id}`);
+        const result = response.data.data;
         setPaciente(result);
       } catch (err) {
         console.log(err);
@@ -151,7 +150,7 @@ const InfoPaciente: React.FC = () => {
   useEffect(() => {
     const fetchSintomas = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/getSintomas')
+        const response = await axios.get('http://localhost:8000/api/getSintomas')
         const result = response.data
         console.log(result);
 
@@ -165,8 +164,8 @@ const InfoPaciente: React.FC = () => {
   useEffect(() => {
     const fetchConsultas = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/getConsultas/${id}`)
-        const result = response.data
+        const response = await axios.get(`http://localhost:8000/api/getConsultas/${id}`)
+        const result = response.data.data
         console.log(result);
         setConsultas(result)
 
@@ -187,7 +186,7 @@ const InfoPaciente: React.FC = () => {
       <Row>
         <section className={styles.section}>
           <div className={styles.foto}>
-            <Image src={`http://localhost:8000/pacientes/fotos/${paciente?.paciente_foto}`} rounded />
+            <Image src={`http://localhost:8000/storage/${paciente?.paciente_foto}`} rounded />
           </div>
           {paciente && (
             <div className={styles.info}>
@@ -262,8 +261,12 @@ const InfoPaciente: React.FC = () => {
                     {sintomas.map((sintoma) => (
                     <Col xs="auto" key={sintoma.sintoma_id}>
                       <InputGroup className={`mb-3 ${styles.igroup}`}>
-                        <InputGroup.Checkbox value={sintoma.sintoma_id} className={styles.checkbox} />
-                        {sintoma.sintoma_nome}
+                        <Form.Check
+                          type='checkbox'
+                          id={(sintoma.sintoma_id).toString()}
+                          value={sintoma.sintoma_id}
+                          label={sintoma.sintoma_nome}
+                        />
                       </InputGroup>
                     </Col>
                     ))}

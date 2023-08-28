@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Middleware\HandleCors;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 

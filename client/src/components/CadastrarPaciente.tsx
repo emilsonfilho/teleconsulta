@@ -5,6 +5,9 @@ import Input from '../form/Input';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
 type Paciente = {
   paciente_id: number;
   paciente_foto: string;
@@ -18,6 +21,7 @@ type Paciente = {
 interface CadastrarPacienteProps {
   addPaciente: (novoPaciente: Paciente) => void;
 }
+// Recebe a função de renderizar quanod passada pelo pai
 
 const CadastrarPaciente: React.FC<CadastrarPacienteProps> = ({ addPaciente }) => {
   // Hooks
@@ -34,6 +38,8 @@ const CadastrarPaciente: React.FC<CadastrarPacienteProps> = ({ addPaciente }) =>
     paciente_telefone: '',
     paciente_atendido: false,
   });
+
+  const notify = () => toast("Paciente cadastrado com sucesso!");
 
   // Functions
   const handleClose = () => setShow(false);
@@ -65,15 +71,19 @@ const CadastrarPaciente: React.FC<CadastrarPacienteProps> = ({ addPaciente }) =>
 
     const formData = new FormData(form);
     axios
-      .post('http://localhost:8000/pacientes/cadastrarPaciente', formData, {
+      .post('http://localhost:8000/api/pacientes/cadastrarPaciente', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
       .then((response) => {
         handleClose();
-        addPaciente(paciente);
+
+        const novoPaciente = { ...paciente, paciente_foto: response.data.path }
+
+        addPaciente(novoPaciente);
         navigate('/');
+        notify();
       })
       .catch((err) => {
         console.log(err);
@@ -146,6 +156,7 @@ const CadastrarPaciente: React.FC<CadastrarPacienteProps> = ({ addPaciente }) =>
         </Form>
       </Modal.Body>
     </Modal>
+    <ToastContainer/>
   </>
 );
 };

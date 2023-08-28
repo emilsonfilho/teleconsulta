@@ -21,19 +21,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/getPacientes', [PacientesController::class, 'index']);
-
-Route::get('/pacientes/fotos/{filename}', [PacientesController::class, 'getImage']);
-
-Route::post('/pacientes/cadastrarPaciente', [PacientesController::class, 'post']);
-
-Route::get('/infoPaciente/{id}', [PacientesController::class, 'getPaciente']);
-
-Route::get('/getSintomas', [SintomasController::class, 'index']);
-
-Route::post('/consultas/cadastrarConsulta', [ConsultasController::class, 'post']);
-
-Route::get('/getConsultas/{id}', [ConsultasController::class, 'index']);
-
-Route::get('/resultados/{id}', [ResultadosController::class, 'getResultado']);

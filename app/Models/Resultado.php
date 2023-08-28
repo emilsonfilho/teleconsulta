@@ -11,4 +11,8 @@ class Resultado extends Model
     protected $table = 'tb_resultados';
     protected $primaryKey = 'resultado_id';
     public $timestamps = false;
+
+    public function appointment() {
+        return $this->hasMany(Consulta::class, 'resultado_id', 'id_resultado');
+    }
 }

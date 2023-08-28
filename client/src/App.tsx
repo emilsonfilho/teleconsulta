@@ -31,8 +31,8 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchPacientes = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/getPacientes');
-        const result = response.data;
+        const response = await axios.get('http://localhost:8000/api/getPacientes');
+        const result = response.data.data;
         setPacientes(result);
       } catch (err) {
         console.log(err);
@@ -40,7 +40,7 @@ const App: React.FC = () => {
     }
 
     fetchPacientes();
-  })
+  }, [])
 
 
   return (
