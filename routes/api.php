@@ -34,6 +34,4 @@ Route::get('/getSintomas', [SintomasController::class, 'index']);
 
 Route::post('/consultas/cadastrarConsulta', [ConsultasController::class, 'post']);
 
-Route::get('/getConsultas/{id}', [ConsultasController::class, 'index']);
-
 Route::get('/resultados/{id}', [ResultadosController::class, 'getResultado']);

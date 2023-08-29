@@ -23,6 +23,7 @@ class AppointmentResource extends JsonResource
             'consulta_pressaoArterialDiastolicaPaciente' => $this->whenNotNull($this->consulta_pressaoArterialDiastolicaPaciente),
             'consulta_frequenciaRespiratoriaPaciente' => $this->whenNotNull($this->consulta_frequenciaRespiratoriaPaciente),
             'id_resultado' => $this->whenNotNull($this->id_resultado),
+            'result' => ResultResource::make($this->whenLoaded('result')),
         ];
     }
 }

@@ -19,7 +19,6 @@ class ConsultasController extends Controller
     {
         $consultas = Consulta::where('id_paciente', $id)->get();
         return AppointmentResource::collection($consultas);
-        //return response()->json($consultas);
     }
     
     // Função para fazer o cadastro de uma consulta

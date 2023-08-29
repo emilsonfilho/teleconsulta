@@ -39,22 +39,21 @@ class PacientesController extends Controller
             'message' => 'Requisição POST bem-sucedida',
             'path' => $data['paciente_foto'],
         ]);
-        //return response()->json($data['paciente_foto']);
     }
 
     // Pega o paciente no banco de dados com base no ID do mesmo
     public function getPaciente(int $id): JsonResource
     {
-        $paciente = Paciente::findOrFail($id);
-        //return response()->json($paciente);
-        return new PatientResource($paciente);
+            $paciente = Paciente::with(['consulta' => function($query) {
+                $query->select('consulta_dataAtendimento', 'consulta_temperaturaPaciente', 'consulta_pressaoArterialSistolicaPaciente', 'consulta_pressaoArterialDiastolicaPaciente', 'consulta_frequenciaCardiacaPaciente', 'consulta_frequenciaRespiratoriaPaciente', 'id_resultado', 'id_paciente', 'consulta_id');
+            }, 'consulta.result' => function($query) {
+                $query->select('resultado_id', 'resultado_nome');
+            }])
+                ->findOrFail($id);
+
+        return PatientResource::make($paciente);
     }
 }
-
-
-
-
-
 
 
 

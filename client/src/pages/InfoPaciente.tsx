@@ -26,6 +26,10 @@ type Consulta = {
   consulta_pressaoArterialDiastolicaPaciente: string;
   consulta_frequenciaRespiratoriaPaciente: string;
   id_resultado: number;
+  result: {
+    resultado_id: number;
+    resultado_nome: string;
+  };
 }
 
 const InfoPaciente: React.FC = () => {
@@ -118,21 +122,6 @@ const InfoPaciente: React.FC = () => {
         console.log(err);
       })
     }
-    const fetchResultado = (id: number) => {
-      const getResultado = async (id: number) => {
-        try {
-          const response = await axios.get(`http://localhost:8000/api/resultados/${id}`);
-          const result = response.data;
-          setResultados((prevResultados) => ({
-            ...prevResultados,
-            [id]: result,
-          }))
-        } catch (err) {
-          console.log(err);
-        }
-      }
-      getResultado(id)
-    }
 
   // UseEffects
   useEffect(() => {
@@ -141,6 +130,13 @@ const InfoPaciente: React.FC = () => {
         const response = await axios.get(`http://localhost:8000/api/infoPaciente/${id}`);
         const result = response.data.data;
         setPaciente(result);
+        setConsultas(result.consulta)
+        result.consulta.forEach((consulta: Consulta) => {
+          setResultados((prevResultados) => ({
+            ...prevResultados,
+            [consulta.result.resultado_id]: consulta.result.resultado_nome,
+          }))
+        })
       } catch (err) {
         console.log(err);
       }
@@ -152,8 +148,6 @@ const InfoPaciente: React.FC = () => {
       try {
         const response = await axios.get('http://localhost:8000/api/getSintomas')
         const result = response.data
-        console.log(result);
-
         setSintomas(result)
       } catch (err) {
         console.log(err)
@@ -161,23 +155,6 @@ const InfoPaciente: React.FC = () => {
     }
     fetchSintomas()
   }, [])
-  useEffect(() => {
-    const fetchConsultas = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8000/api/getConsultas/${id}`)
-        const result = response.data.data
-        console.log(result);
-        setConsultas(result)
-
-        result.forEach((consulta: Consulta) => {
-          fetchResultado(consulta.id_resultado)
-        })
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    fetchConsultas()
-  }, [id])
 
 
   return (
