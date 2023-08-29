@@ -13,14 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ConsultasController extends Controller
-{
-    // Função para pegar todas as consultas de um determinado paciente baseado no ID
-    public function index($id): JsonResource
-    {
-        $consultas = Consulta::where('id_paciente', $id)->get();
-        return AppointmentResource::collection($consultas);
-    }
-    
+{    
     // Função para fazer o cadastro de uma consulta
     public function post(StoreAppointmentRequest $request) {
         $data = $request->validated();
