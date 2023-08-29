@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Container, Row, Image, Button, Form, Col, InputGroup, Table } from 'react-bootstrap';
 import styles from './InfoPaciente.module.css'
 import formatDate from '../utils/formatDate';
+import { ToastContainer, toast } from 'react-toastify';
 
 type DadosSaude = {
   consulta_temperaturaPaciente: string;
@@ -50,6 +51,7 @@ const InfoPaciente: React.FC = () => {
   const [consultas, setConsultas] = useState<Consulta[]>([])
   const [resultados, setResultados] = useState<{ [key: number]: string }>({});
   const [formValid, setFormValid] = useState(false);
+  const notify = () => toast("Consulta cadastrada com sucesso!");
 
   // Functions
   const validateForm = () => {
@@ -117,6 +119,7 @@ const InfoPaciente: React.FC = () => {
         setShowButton(!showButton);
         console.log(response);
         navigate('/');
+        notify();
       })
       .catch(err => {
         console.log(err);
@@ -290,6 +293,7 @@ const InfoPaciente: React.FC = () => {
         )}
       </Row>
     </Container>
+    <ToastContainer />
   </>
   );
 };
