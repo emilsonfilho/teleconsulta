@@ -4,6 +4,11 @@ import styles from './Home.module.css';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import TableDataPaciente from '../components/TableDataPaciente';
 import calculaIdade from '../utils/calculaIdade';
+import ReactPaginate from 'react-paginate';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 
 type Paciente = {
   paciente_id: number;
@@ -15,15 +20,44 @@ type Paciente = {
   paciente_atendido: boolean;
 };
 
+type Paginated = {
+  data: Paciente[];
+  meta: {
+    per_page: number,
+    total: number,
+    last_page: number,
+  }
+}
+
 interface HomeProps {
-  pacientes: Paciente[];
   addPaciente: (paciente: Paciente) => void;
 }
 
-const Home: React.FC<HomeProps> = ({ pacientes, addPaciente }) => {
+const Home: React.FC<HomeProps> = ({ addPaciente }) => {
+  const [pacientes, setPacientes] = useState<Paginated>({} as Paginated);
+  const [page, setPage] = useState(0);
+
+  const fetchPacientes = async () => {
+    try {
+      const { data } = await axios.get('http://localhost:8000/api/getPacientes', {
+        params: {
+          page: page + 1,
+        }
+      });
+      
+      setPacientes(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    fetchPacientes();
+  }, [page]);
+
   return (
     <>
-      {pacientes.length === 0 ? (
+      {pacientes.data?.length === 0 ? (
         <>
           <img src={cat} alt="Imagem de gato" className={styles.img} />
           <h1 className={styles.title}>
@@ -38,6 +72,17 @@ const Home: React.FC<HomeProps> = ({ pacientes, addPaciente }) => {
               <h2 className={styles.title}>Pacientes Cadastrados</h2>
               <div>
                 <Col xs={12}>
+                      <ReactPaginate 
+                        pageCount={pacientes.meta?.last_page}
+                        onPageChange={({ selected }) => setPage(selected)}
+                        containerClassName="pagination"
+                        pageLinkClassName='page-link'
+                        activeClassName='active'
+                        previousLabel={<MdNavigateBefore />}
+                        nextLabel={<MdNavigateNext />}
+                        nextClassName='page-link'
+                        previousClassName='page-link'
+                      />
                   <Table hover className={styles.table}>
                     <thead>
                       <tr>
@@ -51,7 +96,7 @@ const Home: React.FC<HomeProps> = ({ pacientes, addPaciente }) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {pacientes.map((paciente, index) => (
+                      {pacientes.data?.map((paciente, index) => (
                         <TableDataPaciente
                           foto={paciente.paciente_foto}
                           nome={paciente.paciente_nome}
@@ -65,6 +110,7 @@ const Home: React.FC<HomeProps> = ({ pacientes, addPaciente }) => {
                       ))}
                     </tbody>
                   </Table>
+
                 </Col>
               </div>
             </Col>

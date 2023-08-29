@@ -21,6 +21,8 @@ const App: React.FC = () => {
 
   // Hooks
   const [pacientes, setPacientes] = useState<Paciente[]>([]);
+  const [totalPacientes, setTotalPacientes] = useState(0);
+
 
   // Functions
   const addPaciente = (novoPaciente: Paciente) => {
@@ -28,19 +30,6 @@ const App: React.FC = () => {
   }
 
   // UseEffects
-  useEffect(() => {
-    const fetchPacientes = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/api/getPacientes');
-        const result = response.data.data;
-        setPacientes(result);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-
-    fetchPacientes();
-  }, [])
 
 
   return (
@@ -48,7 +37,7 @@ const App: React.FC = () => {
         <Router>
         <Navbar addPaciente={addPaciente} />
         <Routes>
-          <Route path="/" element={<Home pacientes={pacientes} addPaciente={addPaciente} />} />
+          <Route path="/" element={<Home addPaciente={addPaciente} />} />
           <Route path="/infoPaciente/:id" element={<InfoPaciente />} />
         </Routes>
         </Router>

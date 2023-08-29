@@ -12,6 +12,6 @@ class ResultadosController extends Controller
     public function getResultado($id) {
         $resultado = Resultado::where('resultado_id', $id)->first()->resultado_nome;
         return response()->json($resultado);
-        // return new ResultResource();
+        return new ResultResource();
     }
 }
