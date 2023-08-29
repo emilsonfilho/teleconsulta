@@ -33,5 +33,3 @@ Route::get('/infoPaciente/{id}', [PacientesController::class, 'getPaciente']);
 Route::get('/getSintomas', [SintomasController::class, 'index']);
 
 Route::post('/consultas/cadastrarConsulta', [ConsultasController::class, 'post']);
-
-Route::get('/resultados/{id}', [ResultadosController::class, 'getResultado']);
