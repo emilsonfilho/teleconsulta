@@ -52,7 +52,7 @@ const InfoPaciente: React.FC = () => {
   const [consultas, setConsultas] = useState<Consulta[]>([])
   const [resultados, setResultados] = useState<{ [key: number]: string }>({});
   const [formValid, setFormValid] = useState(false);
-  const notify = () => toast("Consulta cadastrada com sucesso!");
+  const notify = (message: string) => toast(message);
 
   // Functions
   const validateForm = () => {
@@ -120,7 +120,7 @@ const InfoPaciente: React.FC = () => {
         setShowButton(!showButton);
         console.log(response);
         navigate('/');
-        notify();
+        notify("Consulta cadastrada com sucesso!");
       })
       .catch(err => {
         console.log(err);
@@ -172,7 +172,16 @@ const InfoPaciente: React.FC = () => {
       cancelButtonText: 'Não'
     }).then((result) => {
       if (result.isConfirmed) {
-       axios.delete('') 
+        try {
+          axios.delete(`http://localhost:8000/api/pacientes/deletarPaciente/${paciente?.paciente_id}`)
+            .then(response => {
+              navigate('/')
+              notify("Paciente removido com sucesso.")
+            })
+            .catch(err => { console.log(err) })
+        } catch (err) {
+          console.log(err);
+        }
       }
     })
   }

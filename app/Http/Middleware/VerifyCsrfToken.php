@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */ 
     protected $except = [
         '/pacientes/cadastrarPaciente',
-        '/consultas/cadastrarConsulta'
+        '/consultas/cadastrarConsulta',
+        '/pacientes/deletarPacientes',
     ];
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePatientRequest;
 use App\Http\Resources\PatientResource;
+use App\Models\Consulta;
 use App\Models\Paciente;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
@@ -52,6 +53,12 @@ class PacientesController extends Controller
                 ->findOrFail($id);
 
         return PatientResource::make($paciente);
+    }
+    
+    public function destroy($id) {
+        Consulta::where('id_paciente', $id)->delete();
+        Paciente::where('paciente_id', $id)->delete();
+        return response()->json(['message' => 'Paciente removido com sucesso.']);
     }
 }
 
