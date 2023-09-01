@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePatientRequest;
-use App\Http\Resources\PatientCollection;
 use App\Http\Resources\PatientResource;
 use App\Models\Paciente;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -24,7 +23,7 @@ class PacientesController extends Controller
             ->orderBy('paciente_nome', 'asc')
             ->paginate(5);
 
-        return new PatientCollection($pacientes);
+        return PatientResource::collection($pacientes);
     }
 
     // Cadastra o paciente no banco de dados

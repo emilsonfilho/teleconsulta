@@ -14,6 +14,9 @@ class SymptomResource extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return $this->collection->pluck('sintoma_id')->toArray();
+        return [
+            'sintoma_id' => $this->sintoma_id,
+            'sintoma_nome' => $this->sintoma->nome,
+        ];
     }
 }

@@ -17,7 +17,6 @@ class ConsultasController extends Controller
     // Função para fazer o cadastro de uma consulta
     public function post(StoreAppointmentRequest $request) {
         $data = $request->validated();
-
         $ids = $this->getIdsSintomas($request);
         $id_resultado = $this->getIdResultado($ids);
         $id_paciente = $this->getInputValue($request, 'id_paciente');
@@ -57,8 +56,13 @@ class ConsultasController extends Controller
     private function getIdsSintomas($request) {
         $value = $request->input('ids_sintomas');
         $idsArray = json_decode($value, true);
-        $sintomas = Sintoma::whereIn('sintoma_id', array_column($idsArray, 'sintoma_id'))->get();
-        return new SymptomResource($sintomas);
+        $ids_sintomas = [];
+
+        foreach ($idsArray as $id) {
+            $ids_sintomas[] = $id["sintoma_id"];
+        }
+
+        return $ids_sintomas;
     }
 
     // Faz o cálculo da probabilidade de infecção do paciente

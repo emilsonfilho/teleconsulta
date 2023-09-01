@@ -5,6 +5,7 @@ import { Container, Row, Image, Button, Form, Col, InputGroup, Table } from 'rea
 import styles from './InfoPaciente.module.css'
 import formatDate from '../utils/formatDate';
 import { ToastContainer, toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 type DadosSaude = {
   consulta_temperaturaPaciente: string;
@@ -159,6 +160,23 @@ const InfoPaciente: React.FC = () => {
     fetchSintomas()
   }, [])
 
+  function deletePatient() {
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Você está prestes a excluir um paciente.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, deletar',
+      cancelButtonText: 'Não'
+    }).then((result) => {
+      if (result.isConfirmed) {
+       axios.delete('') 
+      }
+    })
+  }
+
 
   return (
 	<>
@@ -180,6 +198,9 @@ const InfoPaciente: React.FC = () => {
               <p>
                 <strong>Telefone:</strong> {paciente.paciente_telefone}
               </p>
+              <Button variant='danger' onClick={deletePatient}>
+                Deletar Paciente
+              </Button>
             </div>
           )}
         </section>
