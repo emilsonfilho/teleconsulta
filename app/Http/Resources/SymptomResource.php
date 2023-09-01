@@ -15,8 +15,8 @@ class SymptomResource extends ResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'sintoma_id' => $this->sintoma_id,
-            'sintoma_nome' => $this->sintoma->nome,
+            'sintoma_id' => $this->whenNotNull($this->sintoma_id),
+            'sintoma_nome' => $this->whenNotNull($this->sintoma->nome),
         ];
     }
 }

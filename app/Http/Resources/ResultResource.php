@@ -15,8 +15,8 @@ class ResultResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'resultado_id' => $this->resultado_id,
-            'resultado_nome' => $this->resultado_nome,
+            'resultado_id' => $this->whenNotNull($this->resultado_id),
+            'resultado_nome' => $this->whenNotNull($this->resultado_nome),
         ];
     }
 }
