@@ -58,6 +58,8 @@ const CadastrarPaciente: React.FC<CadastrarPacienteProps> = ({ addPaciente }) =>
     e.preventDefault();
 
     const form = e.target as HTMLFormElement;
+    console.log(form);
+    
     if (!form.checkValidity()) {
       setValidated(true);
       return;
@@ -116,44 +118,44 @@ const CadastrarPaciente: React.FC<CadastrarPacienteProps> = ({ addPaciente }) =>
               placeholder=""
               handleChange={handleChange}
               required
-          />
-          <Input
-            type="text"
-            name="paciente_cpf"
-            label="CPF"
-            placeholder="CPF"
-            handleChange={handleChange}
-            required
-            mask='000.000.000-00'
-          />
-          <Input
-            type="tel"
-            name="paciente_telefone"
-            label="Telefone"
-            placeholder="Telefone"
-            handleChange={handleChange}
-            required
-            mask='(00) 0.0000-0000'
-          />
-          <Input
-            type="file"
-            name="paciente_foto"
-            label="Foto"
-            placeholder="Selecione uma foto"
-            handleChange={handleFileChange}
-            required
-          />
-          {validated && (
-            <div className={styles.error}>
-              <p>{errorMessage}</p>
+            />
+            <Input
+              type="text"
+              name="paciente_cpf"
+              label="CPF"
+              placeholder="CPF"
+              handleChange={handleChange}
+              required
+              mask='000.000.000-00'
+            />
+            <Input
+              type="tel"
+              name="paciente_telefone"
+              label="Telefone"
+              placeholder="Telefone"
+              handleChange={handleChange}
+              required
+              mask='(00) 0.0000-0000'
+            />
+            <Input
+              type="file"
+              name="paciente_foto"
+              label="Foto"
+              placeholder="Selecione uma foto"
+              handleChange={handleFileChange}
+              required
+            />
+            {validated && (
+              <div className={styles.error}>
+                <p>{errorMessage}</p>
+              </div>
+            )}
+            <div className={styles.buttonsContainer}>
+              <BootstrapButton variant="primary" type="submit" className={styles.btn}>
+                Cadastrar
+              </BootstrapButton>
             </div>
-          )}
-          <div className={styles.buttonsContainer}>
-            <BootstrapButton variant="primary" type="submit" className={styles.btn}>
-              Cadastrar
-            </BootstrapButton>
-          </div>
-        </Form>
+          </Form>
       </Modal.Body>
     </Modal>
     <ToastContainer/>

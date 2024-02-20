@@ -25,6 +25,7 @@ const Input: React.FC<InputProps> = ({
   isInvalid,
   errorMessage,
   mask,
+  value
 }) => {
   // Resources
   const inputRef = createRef<HTMLInputElement>()
@@ -42,7 +43,11 @@ const Input: React.FC<InputProps> = ({
   return (
     <Form.Group controlId={`form${name}`}>
       <Form.Label>{label}</Form.Label>
-      {mask ? (
+      {if (make) {
+        
+      }}
+      
+      mask ? (
         <Form.Control 
           as={IMaskInput}
           type={type}
@@ -63,6 +68,7 @@ const Input: React.FC<InputProps> = ({
           required={required}
           isInvalid={isInvalid}
           ref={inputRef}
+          value={value}        
         />
       )}
       {isInvalid && (

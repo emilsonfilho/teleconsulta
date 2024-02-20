@@ -35,3 +35,5 @@ Route::get('/getSintomas', [SintomasController::class, 'index']);
 Route::post('/consultas/cadastrarConsulta', [ConsultasController::class, 'post']);
 
 Route::delete('/pacientes/deletarPaciente/{id}', [PacientesController::class, 'destroy']);
+
+Route::put('/pacientes/atualizarPaciente/{id}', [PacientesController::class, 'update']);

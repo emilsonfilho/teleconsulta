@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Container, Row, Image, Button, Form, Col, InputGroup, Table } from 'react-bootstrap';
+import { Container, Row, Image, Button, Form, Col, InputGroup, Table, Modal } from 'react-bootstrap';
 import styles from './InfoPaciente.module.css'
 import formatDate from '../utils/formatDate';
 import { ToastContainer, toast } from 'react-toastify';
 import Swal from 'sweetalert2';
+import Input from '../form/Input';
 
 type DadosSaude = {
   consulta_temperaturaPaciente: string;
@@ -53,6 +54,44 @@ const InfoPaciente: React.FC = () => {
   const [resultados, setResultados] = useState<{ [key: number]: string }>({});
   const [formValid, setFormValid] = useState(false);
   const notify = (message: string) => toast(message);
+  const [showModel, setShowModel] = useState(false);
+  const handleShowModel = () => setShowModel(true);
+  const handleCloseModel = () => setShowModel(false);
+  const [validated, setValidated] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(e.target);
+    
+
+    const formAtualizacao = e.target as HTMLFormElement;
+    console.log(formAtualizacao);
+    if (!formAtualizacao.checkValidity()) {
+      setValidated(true);
+      
+      return;
+    }
+
+    if (!paciente.paciente_nome || !paciente.paciente_dataN || !paciente.paciente_cpf || !paciente.paciente_telefone) {
+      setValidated(true);
+      setErrorMessage('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    const formDataAtualizacao = new FormData(formAtualizacao);
+    console.log(formDataAtualizacao);
+    
+    axios
+      .put(`http://localhost:8000/api/pacientes/atualizarPaciente/${id}`, formDataAtualizacao)
+      .then((response) => {
+        handleCloseModel();
+        navigate('/');
+        notify('Paciente atualizado com sucesso.');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   // Functions
   const validateForm = () => {
@@ -83,6 +122,11 @@ const InfoPaciente: React.FC = () => {
     }));
   
     validateForm();
+  };
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setPaciente({ ...paciente, [name]: value });
+    console.log(paciente)
   };
   const toggleConsulta = () => {
     setShowConsulta(!showConsulta)
@@ -189,6 +233,65 @@ const InfoPaciente: React.FC = () => {
 
   return (
 	<>
+    <Modal show={showModel} onHide={handleCloseModel}>
+      <Modal.Header closeButton>
+        <Modal.Title>Cadastro de Pacientes</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {paciente && (
+          <>
+          {/* Lembre-se que, ao adicionar para atualizar a imagem, será preciso adicionar o encType */}
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+              <Input
+                type='text'
+                name='paciente_nome'
+                label='Nome completo'
+                placeholder='Nome do paciente'
+                handleChange={handleChangeInput}
+                value={paciente.paciente_nome}
+              />
+              <Input
+                type='date'
+                name='paciente_dataN'
+                label='Data de Nascimento'
+                placeholder='Insira a data de nascimento'
+                handleChange={handleChangeInput}
+                value={paciente.paciente_dataN}
+              />
+              <Input
+                type='text'
+                name='paciente_cpf'
+                label='Cadastro de Pessoa Física'
+                placeholder='CPF'
+                handleChange={handleChangeInput}
+                value={paciente.paciente_cpf.replaceAll(/[.-]/g,'')}
+                mask='000.000.000-00'
+              />
+              <Input
+                type='text'
+                name='paciente_telefone'
+                label='Telefone'
+                placeholder='Telefone'
+                handleChange={handleChangeInput}
+                value={paciente.paciente_telefone.replaceAll(/[()\s.-]/g,'')}
+                mask='(00) 0.0000-0000'
+              />
+              {validated && (
+                <div className={styles.error}>
+                  <p>{errorMessage}</p>
+                </div>
+              )}
+              <br />
+              <div className={styles.buttonsContainer}>
+                <Button variant="primary" type="submit" className={styles.btn}>
+                  Atualizar
+                </Button>
+              </div>
+            </Form>
+          </>
+        )}
+      </Modal.Body>
+    </Modal>
     <Container>
       <Row>
         <section className={styles.section}>
@@ -207,9 +310,12 @@ const InfoPaciente: React.FC = () => {
               <p>
                 <strong>Telefone:</strong> {paciente.paciente_telefone}
               </p>
-              <Button variant='danger' onClick={deletePatient}>
-                Deletar Paciente
-              </Button>
+              <div className={styles.buttons}>
+                <Button variant='primary' onClick={handleShowModel}>Editar Paciente</Button>
+                <Button variant='danger' onClick={deletePatient}>
+                  Deletar Paciente
+                </Button>
+              </div>
             </div>
           )}
         </section>

@@ -6,6 +6,7 @@ use App\Http\Requests\StorePatientRequest;
 use App\Http\Resources\PatientResource;
 use App\Models\Consulta;
 use App\Models\Paciente;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
@@ -59,6 +60,12 @@ class PacientesController extends Controller
         Consulta::where('id_paciente', $id)->delete();
         Paciente::where('paciente_id', $id)->delete();
         return response()->json(['message' => 'Paciente removido com sucesso.']);
+    }
+
+    public function update($request) {
+        return response()->json($request);
+        // $data = $request->validated();
+        // Paciente::where('id_paciente', $id)->first()->update($data);
     }
 }
 
